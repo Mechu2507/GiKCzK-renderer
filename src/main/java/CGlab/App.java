@@ -10,9 +10,18 @@ public class App {
 
     public static void main(String[] args) {
 
-        Renderer mainRenderer = new Renderer(System.getProperty("user.home")+"/render.png");
+        System.out.println("=========ARGS=========");
+        System.out.println("path to png file:");
+        System.out.println(args[0]);
+        System.out.println("png width:");
+        System.out.println(args[1]);
+        System.out.println("====================");
+        System.out.println("png height:");
+        System.out.println(args[2]);
+        System.out.println("====================");
+        Renderer mainRenderer = new Renderer(args[0]);
         mainRenderer.clear();
-        mainRenderer.drawPoint(200, 200);
+        mainRenderer.drawPoint( Integer.parseInt(args[1]), Integer.parseInt(args[2]));
         try {
             mainRenderer.save();
         } catch (IOException ex) {
