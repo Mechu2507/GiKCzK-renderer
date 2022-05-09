@@ -12,7 +12,7 @@ public class App {
 
         Renderer mainRenderer = new Renderer(System.getProperty("user.home")+"/render.png");
         mainRenderer.clear();
-        mainRenderer.drawPoint(100, 100);
+        mainRenderer.drawPoint(200, 200);
         try {
             mainRenderer.save();
         } catch (IOException ex) {
