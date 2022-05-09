@@ -11,12 +11,12 @@ public class App {
     public static void main(String[] args) {
 
         System.out.println("=========ARGS=========");
-        System.out.println("path to png file:");
+        System.out.println("path to png file-");
         System.out.println(args[0]);
-        System.out.println("png width:");
+        System.out.println("png width-");
         System.out.println(args[1]);
         System.out.println("====================");
-        System.out.println("png height:");
+        System.out.println("png height-");
         System.out.println(args[2]);
         System.out.println("====================");
         Renderer mainRenderer = new Renderer(args[0]);
