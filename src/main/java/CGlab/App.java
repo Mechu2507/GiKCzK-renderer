@@ -11,17 +11,17 @@ public class App {
     public static void main(String[] args) {
 
         System.out.println("=========ARGS=========");
-        System.out.println("path to png file-");
-        System.out.println(args[0]);
-        System.out.println("png width-");
-        System.out.println(args[1]);
+        System.out.println("path to png file:");
+//        System.out.println(args[0]);
+        System.out.println("png width:");
+//        System.out.println(args[1]);
         System.out.println("====================");
-        System.out.println("png height-");
-        System.out.println(args[2]);
+        System.out.println("png height:");
+//        System.out.println(args[2]);
         System.out.println("====================");
-        Renderer mainRenderer = new Renderer(args[0]);
+        Renderer mainRenderer = new Renderer("img/image.png", 800, 800);
         mainRenderer.clear();
-        mainRenderer.drawPoint( Integer.parseInt(args[1]), Integer.parseInt(args[2]));
+        mainRenderer.drawPoint( 800, 800);
         try {
             mainRenderer.save();
         } catch (IOException ex) {

@@ -12,14 +12,16 @@ public class Renderer {
     public enum LineAlgo { NAIVE, DDA, BRESENHAM, BRESENHAM_INT; }
 
     private BufferedImage render;
-    public final int h = 200;
-    public final int w = 200;
+    public int h = 200;
+    public int w = 200;
 
     private String filename;
     private LineAlgo lineAlgo = LineAlgo.NAIVE;
 
-    public Renderer(String filename) {
-        render = new BufferedImage(200, 200, BufferedImage.TYPE_INT_ARGB);
+    public Renderer(String filename,Integer width,Integer height) {
+        h = 2*height;
+        w = 2*width;
+        render = new BufferedImage(2*width, 2*height, BufferedImage.TYPE_INT_ARGB);
         this.filename = filename;
     }
 
@@ -37,6 +39,16 @@ public class Renderer {
 
     public void drawLineNaive(int x0, int y0, int x1, int y1) {
         // TODO: zaimplementuj
+
+        int dy = y1 - y0;
+        int dx = x1 - x0;
+        int m = dy/dx;
+        int y = y0;
+
+        for (int i = x0; i < x1; i++) {
+            drawPoint(i,y);
+            y = y + m;
+        }
     }
 
     public void drawLineDDA(int x0, int y0, int x1, int y1) {
