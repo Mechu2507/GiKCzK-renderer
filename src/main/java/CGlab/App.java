@@ -38,7 +38,7 @@ public class App {
 //        mainRenderer.drawLine(50,50,50, 100 -5,  Renderer.LineAlgo.valueOf("NAIVE"));// Oktanty:0
 //        mainRenderer.drawLine(50,50,100, 100 -5,  Renderer.LineAlgo.valueOf("NAIVE"));// Oktanty:1
 
-        mainRenderer.drawTriangle(new Vec2f(10,10),new Vec2f(10,30), new Vec2f(40,10));
+        mainRenderer.drawTriangle(new Vec2f(10,10),new Vec2f(10,30), new Vec2f(40,10), new Color(255,0,0));
 
         try {
             mainRenderer.save();

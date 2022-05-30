@@ -3,6 +3,7 @@ package CGlab;
 public class Vec3i {
     public int x;
     public int y;
+    public int z;
 
     public Vec3i(int x, int y, int z) {
         this.x = x;
@@ -10,7 +11,6 @@ public class Vec3i {
         this.z = z;
     }
 
-    public int z;
 
     @Override
     public String toString() {
