@@ -28,15 +28,15 @@ public class App {
 
         mainRenderer.clear();
         mainRenderer.drawLine(50,50,100, 50 +5, Renderer.LineAlgo.valueOf("NAIVE"));// Oktanty:1
-        mainRenderer.drawLine(50,50,100, 5, Renderer.LineAlgo.valueOf("NAIVE"));// Oktanty:1
-        mainRenderer.drawLine(50,50,50, 5,  Renderer.LineAlgo.valueOf("NAIVE"));// Oktanty:0
+//        mainRenderer.drawLine(50,50,100, 5, Renderer.LineAlgo.valueOf("NAIVE"));// Oktanty:1
+//        mainRenderer.drawLine(50,50,50, 5,  Renderer.LineAlgo.valueOf("NAIVE"));// Oktanty:0
 
-        mainRenderer.drawLine(50,50,0, 5,  Renderer.LineAlgo.valueOf("NAIVE"));// Oktanty:0
-        mainRenderer.drawLine(50,50,0, 50+5,  Renderer.LineAlgo.valueOf("NAIVE"));// Oktanty:0
+//        mainRenderer.drawLine(50,50,0, 5,  Renderer.LineAlgo.valueOf("NAIVE"));// Oktanty:0
+//        mainRenderer.drawLine(50,50,0, 50+5,  Renderer.LineAlgo.valueOf("NAIVE"));// Oktanty:0
 
-        mainRenderer.drawLine(50,50,0, 100 -5,  Renderer.LineAlgo.valueOf("NAIVE"));// Oktanty:0
-        mainRenderer.drawLine(50,50,50, 100 -5,  Renderer.LineAlgo.valueOf("NAIVE"));// Oktanty:0
-        mainRenderer.drawLine(50,50,100, 100 -5,  Renderer.LineAlgo.valueOf("NAIVE"));// Oktanty:1
+//        mainRenderer.drawLine(50,50,0, 100 -5,  Renderer.LineAlgo.valueOf("NAIVE"));// Oktanty:0
+//        mainRenderer.drawLine(50,50,50, 100 -5,  Renderer.LineAlgo.valueOf("NAIVE"));// Oktanty:0
+//        mainRenderer.drawLine(50,50,100, 100 -5,  Renderer.LineAlgo.valueOf("NAIVE"));// Oktanty:1
 
         try {
             mainRenderer.save();
