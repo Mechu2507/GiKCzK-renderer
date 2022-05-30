@@ -1,7 +1,7 @@
 package CGlab;
 
 
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -21,29 +21,39 @@ public class Renderer {
     public Renderer(String filename,Integer width,Integer height,String method) {
         h = height;
         w = width;
-        render = new BufferedImage(2*width, 2*height, BufferedImage.TYPE_INT_ARGB);
+        render = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         this.filename = filename;
     }
 
     public Vec3f barycentric(Vec2f A, Vec2f B, Vec2f C, Vec2f P) {
-        Vec3f v1 = new Vec3f(A.x + B.x, A.x + C.x, P.x + A.x);
-        // x wektorów AB, AC ora PA.
 
-        Vec3f v2 = new Vec3f(A.y + B.y, A.y + C.y, P.y + A.y);
-        // y wektorów AB, AC ora PA.
-
+        Vec3f v1 = new Vec3f((B.x - A.x), (C.x - A.x), (A.x - P.x));
+        Vec3f v2 = new Vec3f((B.y - A.y), (C.y - A.y), (A.y - P.y));
         Vec3f cross = crossProduct(v1, v2);
-
         Vec2f uv = new Vec2f(cross.x / cross.z, cross.y / cross.z);
 
+
         Vec3f barycentric = new Vec3f(uv.x, uv.y, 1 - uv.x - uv.y);
+
         return barycentric;
     }
 
+    public void drawTriangle(Vec2f A, Vec2f B, Vec2f C) {
+        int white = 255 | (255 << 8) | (255 << 16) | (255 << 24);
+        for (int i = 0; i < w; i++) {
+            for (int j = 0; j < h; j++) {
+                Vec2f P = new Vec2f((float)i, (float)j);
+                if ( (barycentric(A, B, C, P).x > 0 && barycentric(A, B, C, P).x < 1 && barycentric(A, B, C, P).y < 1 && barycentric(A, B, C, P).y > 0   && barycentric(A, B, C, P).z > 0 && barycentric(A, B, C, P).z < 1)) {
+                    render.setRGB(i, j, white);
+                }
+            }
+        }
+    }
+
     private Vec3f crossProduct(Vec3f w1,Vec3f w2){
-        float x = (w1.y * w2.z) - (w1.z * w2.y);
-        float y = (w1.z * w2.x) - (w1.x * w2.z);
-        float z = (w1.x * w2.y) - (w1.y * w2.x);
+        float x = w1.y * w2.z - w1.z * w2.y;
+        float y = w1.z * w2.x - w1.x * w2.z;
+        float z = w1.x * w2.y - w1.y * w2.x;
         return new Vec3f(x, y, z);
     }
 

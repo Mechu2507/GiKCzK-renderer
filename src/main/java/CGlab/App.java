@@ -23,11 +23,11 @@ public class App {
         System.out.println("====================");
         Renderer mainRenderer = new Renderer("img/image.png", 800, 800,"NAIVE");
         mainRenderer.clear();
-        mainRenderer.drawPoint( 800, 800);
-//      mainRenderer.drawLine(0,0,100, 100, Renderer.LineAlgo.valueOf("NAIVE"));
+//        mainRenderer.drawPoint( 800, 800);
+//        mainRenderer.drawLine(0,0,100, 100, Renderer.LineAlgo.valueOf("NAIVE"));
 
-        mainRenderer.clear();
-        mainRenderer.drawLine(50,50,100, 50 +5, Renderer.LineAlgo.valueOf("NAIVE"));// Oktanty:1
+//        mainRenderer.clear();
+//        mainRenderer.drawLine(50,50,100, 50 +5, Renderer.LineAlgo.valueOf("NAIVE"));// Oktanty:1
 //        mainRenderer.drawLine(50,50,100, 5, Renderer.LineAlgo.valueOf("NAIVE"));// Oktanty:1
 //        mainRenderer.drawLine(50,50,50, 5,  Renderer.LineAlgo.valueOf("NAIVE"));// Oktanty:0
 
@@ -37,6 +37,8 @@ public class App {
 //        mainRenderer.drawLine(50,50,0, 100 -5,  Renderer.LineAlgo.valueOf("NAIVE"));// Oktanty:0
 //        mainRenderer.drawLine(50,50,50, 100 -5,  Renderer.LineAlgo.valueOf("NAIVE"));// Oktanty:0
 //        mainRenderer.drawLine(50,50,100, 100 -5,  Renderer.LineAlgo.valueOf("NAIVE"));// Oktanty:1
+
+        mainRenderer.drawTriangle(new Vec2f(10,10),new Vec2f(10,30), new Vec2f(40,10));
 
         try {
             mainRenderer.save();
