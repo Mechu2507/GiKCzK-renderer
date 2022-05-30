@@ -5,6 +5,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collections;
 import javax.imageio.ImageIO;
 
 public class Renderer {
@@ -16,8 +18,6 @@ public class Renderer {
     public int w = 200;
     private String filename;
     private LineAlgo lineAlgo = LineAlgo.NAIVE;
-
-
 
 
     public Renderer(String filename,Integer width,Integer height,String method) {
@@ -39,10 +39,17 @@ public class Renderer {
     }
 
     public void drawTriangle(Vec2f A, Vec2f B, Vec2f C, Color color) {
-        for (int i = 0; i < w; i++) {
-            for (int j = 0; j < h; j++) {
-                Vec2f P = new Vec2f((float)i, (float)j);
-                if ( (barycentric(A, B, C, P).x > 0 && barycentric(A, B, C, P).x < 1 && barycentric(A, B, C, P).y < 1 && barycentric(A, B, C, P).y > 0   && barycentric(A, B, C, P).z > 0 && barycentric(A, B, C, P).z < 1)) {
+        Float[] xs = {A.x, B.x, C.x};
+        Float[] ys = {A.y, B.y, C.y};
+        int minx = Math.round(Collections.min(Arrays.asList(xs)));
+        int maxx = Math.round(Collections.max(Arrays.asList(xs))+ 0.5f);
+        int miny = Math.round(Collections.min(Arrays.asList(ys)));
+        int maxy = Math.round(Collections.max(Arrays.asList(ys))+ 0.5f);
+
+        for (int i = minx; i <= maxx; i++) {
+            for (int j = miny; j <= maxy; j++) {
+                Vec2f P = new Vec2f((float) i, (float) j);
+                if ((barycentric(A, B, C, P).x > 0 && barycentric(A, B, C, P).x < 1 && barycentric(A, B, C, P).y < 1 && barycentric(A, B, C, P).y > 0 && barycentric(A, B, C, P).z > 0 && barycentric(A, B, C, P).z < 1)) {
                     drawPoint(i, j, color);
                 }
             }
@@ -106,7 +113,7 @@ public class Renderer {
         } // Oktanty ktore dzialają: 0,1,7
     }
 
-    private void  plotLineLow(int x0, int y0, int x1, int y1) {
+    private void plotLineLow(int x0, int y0, int x1, int y1) {
         int dx = x1 - x0;
         int dy = y1 - y0;
         int yi = 1;
@@ -118,30 +125,30 @@ public class Renderer {
         int y = y0;
 
         for (int x = x0; x < x1; x++) {
-            drawPoint(x, y,new Color(255,255,0));
+            drawPoint(x, y, new Color(255, 255, 0));
             if (D > 0) {
                 y = y + yi;
                 D = D + (2 * (dy - dx));
-            }else{
+            } else {
                 D = D + 2 * dy;
             }
         }
     }
-    private void plotLineHigh(int x0, int y0,int x1, int y1){
+
+    private void plotLineHigh(int x0, int y0, int x1, int y1) {
         int dx = x1 - x0;
-        int  dy = y1 - y0;
+        int dy = y1 - y0;
         int xi = 1;
-        if (dx < 0){
+        if (dx < 0) {
             xi = -1;
             dx = -dx;
         }
         int D = (2 * dx) - dy;
         int x = x0;
 
-        for (int y = y0 ;y< y1;y++){
-            drawPoint( x,  y,new Color(0,0,0));
-            if (D > 0){
-                x = x + xi;
+        for (int y = y0; y < y1; y++) {
+            drawPoint(x, y, new Color(0, 0, 0));
+            if (D > 0) {
                 D = D + (2 * (dx - dy));
             }else{
                 D = D + 2*dx;
