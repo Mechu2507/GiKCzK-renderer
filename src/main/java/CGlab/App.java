@@ -40,7 +40,7 @@ public class App {
 
 //        mainRenderer.drawTriangle(new Vec2f(10,10),new Vec2f(10,30), new Vec2f(40,10), new Color(255,0,0));
 
-        RandomColorRenderer mainRenderer = new RandomColorRenderer("img/image.png", 1000, 1000,"NAIVE");
+        FlatShadingRenderer mainRenderer = new FlatShadingRenderer("img/image.png", 1000, 1000,"NAIVE");
         Model jelen = new Model();
         jelen.readOBJ("deer.obj");
         mainRenderer.clear();
