@@ -19,6 +19,12 @@ public class Renderer {
     private String filename;
     private LineAlgo lineAlgo = LineAlgo.NAIVE;
 
+    public int getWidth() {
+        return w;
+    }
+    public int getHeight() {
+        return w;
+    }
 
     public Renderer(String filename,Integer width,Integer height,String method) {
         h = height;
@@ -36,6 +42,34 @@ public class Renderer {
         Vec3f barycentric = new Vec3f(uv.x, uv.y, 1 - uv.x - uv.y);
 
         return barycentric;
+    }
+
+    public Vec3f barycentric(Vec2i A, Vec2i B, Vec2i C, Vec2i P) {
+        Vec3f v1 = new Vec3f((B.x - A.x), (C.x - A.x), (A.x - P.x));
+        Vec3f v2 = new Vec3f((B.y - A.y), (C.y - A.y), (A.y - P.y));
+        Vec3f cross = crossProduct(v1, v2);
+        Vec2f uv = new Vec2f(cross.x / cross.z, cross.y / cross.z);
+
+        Vec3f barycentric = new Vec3f(uv.x, uv.y, 1 - uv.x - uv.y);
+
+        return barycentric;
+    }
+    public void drawTriangle(Vec2i A, Vec2i B, Vec2i C, Color color) {
+        Integer[] xs = {A.x, B.x, C.x};
+        Integer[] ys = {A.y, B.y, C.y};
+        int minx = Collections.min(Arrays.asList(xs));
+        int maxx = Collections.max(Arrays.asList(xs));
+        int miny = Collections.min(Arrays.asList(ys));
+        int maxy = Collections.max(Arrays.asList(ys));
+
+        for (int i = minx; i <= maxx; i++) {
+            for (int j = miny; j <= maxy; j++) {
+                Vec2i P = new Vec2i( i,j);
+                if ((barycentric(A, B, C, P).x > 0 && barycentric(A, B, C, P).x < 1 && barycentric(A, B, C, P).y < 1 && barycentric(A, B, C, P).y > 0 && barycentric(A, B, C, P).z > 0 && barycentric(A, B, C, P).z < 1)) {
+                    drawPoint(i, j, color);
+                }
+            }
+        }
     }
 
     public void drawTriangle(Vec2f A, Vec2f B, Vec2f C, Color color) {
@@ -61,6 +95,13 @@ public class Renderer {
         float y = w1.z * w2.x - w1.x * w2.z;
         float z = w1.x * w2.y - w1.y * w2.x;
         return new Vec3f(x, y, z);
+    }
+
+    private Vec3i crossProduct(Vec3i w1, Vec3i w2) {
+        Integer x = w1.y * w2.z - w1.z * w2.y;
+        Integer y = w1.z * w2.x - w1.x * w2.z;
+        Integer z = w1.x * w2.y - w1.y * w2.x;
+        return new Vec3i(x, y, z);
     }
 
     public void drawPoint(int x, int y,Color color) {

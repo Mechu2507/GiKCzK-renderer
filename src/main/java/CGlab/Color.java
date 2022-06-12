@@ -1,5 +1,7 @@
 package CGlab;
 
+import java.util.Random;
+
 public class Color extends Vec3i {
     private int validateValue(int color){
         if (color < 0) {
@@ -11,6 +13,14 @@ public class Color extends Vec3i {
         } else {
             return color;
         }
+    }
+
+    public Color(){
+        super(0,0,0);
+        Random random = new Random();
+        x = random.nextInt(255 - 0);
+        y = random.nextInt(255 - 0);
+        z = random.nextInt(255 - 0);
     }
 
     public Color(int x, int y, int z) {
