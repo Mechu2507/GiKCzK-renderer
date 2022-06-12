@@ -45,6 +45,8 @@ public class App {
         jelen.readOBJ("deer.obj");
         mainRenderer.clear();
         mainRenderer.render(jelen);
+        jelen.translate(new Vec3f(0.3f,0.3f,0.3f));
+        mainRenderer.render(jelen);
 
         try {
             mainRenderer.save();

@@ -6,30 +6,46 @@ import java.util.List;
 
 public class Model {
 
-    private ArrayList<Vec3f> vertexList; private ArrayList<Vec3i> faceList;
+    private ArrayList<Vec3f> vertexList;
+    private ArrayList<Vec3i> faceList;
 
-    public Model() {
+
+
+    public void translate(Vec3f v) {
+        for (int i = 0; i < vertexList.size(); i++) {
+            Vec3f translatedVertex = vertexList.get(i);
+            translatedVertex.x += v.x;
+            translatedVertex.y += v.y;
+            translatedVertex.z += v.z;
+            vertexList.set(i,translatedVertex);
+        }
     }
 
-    public List<Vec3i> getFaceList() { return faceList;
+    public List<Vec3i> getFaceList() {
+        return faceList;
     }
 
-    public Vec3f getVertex(int index){ return vertexList.get(index);
+    public Vec3f getVertex(int index){
+        return vertexList.get(index);
     }
 
-    public void readOBJ(String path) throws IOException { vertexList = new ArrayList<>();
+    public void readOBJ(String path) throws IOException {
+        vertexList = new ArrayList<>();
         faceList = new ArrayList<>();
         InputStream objInputStream = new FileInputStream(path);
-        BufferedReader reader = new BufferedReader(new InputStreamReader(objInputStream)); vertexList.add(new Vec3f(0,0,0));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(objInputStream));
+        vertexList.add(new Vec3f(0,0,0));
         while(reader.ready()) {
             String line = reader.readLine();
-            if(isVertex(line)) vertexList.add(parseVertexFromOBJ(line)); else if(isFace(line)) faceList.add(parseFaceFromOBJ(line));
+            if(isVertex(line)) vertexList.add(parseVertexFromOBJ(line));
+            else if(isFace(line)) faceList.add(parseFaceFromOBJ(line));
         }
     }
 
     private boolean isVertex(String line) {
         return line.charAt(0) == 'v' && line.charAt(1) == ' ';
     }
+
     private boolean isFace(String line) {
         return line.charAt(0) == 'f' && line.charAt(1) == ' ';
     }
@@ -39,7 +55,6 @@ public class Model {
         return new Vec3f( Float.parseFloat(splitted[1]), Float.parseFloat(splitted[2]),
                 Float.parseFloat(splitted[3]));
     }
-
 
 
     private Vec3i parseFaceFromOBJ(String line){
